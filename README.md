@@ -17,28 +17,27 @@ PostgreSQL Modalidad: Take-home + entrevista de defensa técnica Tiempo sugerido
 |Estado           |   enum        |
 |FechaAlta        |   datetime    |
 
- --> FechaModificacion
- --> UsuarioModificacion
+ --> FechaModificacion datetime
+ --> UsuarioModificacion string
 
----> Añadiria campos para auditoria como Usuario que Modifica, fecha de modificacion
+- Añadiria campos para auditoria como Usuario que Modifica, fecha de modificacion
 
+- Tambien no hice la validacion del RFC, talvez con un regex, o una funcion seria lo ideal, tambien se puede considerar si la persona es Fisica o Moral, para afinar esa validacion.
 
-5. Requisitos técnicos 
- Backend (.NET 8)          OK
- FastEndpoints para los endpoints (REPR pattern).   OK
- Separación de capas clara.                         OK
- EF Core con SQL Server o PostgreSQL + migraciones. OK
- Validadores separados de la lógica de endpoint.    OK, Pero no hay un validador como FluentValidation, solo en el dominio
- Middlewares: al menos manejo global de errores (respuestas de error consistentes).    OK
- Seguridad: autenticación (JWT o API Key) y autorización en los endpoints;             OK, Se hizo un usuario generico, prueba
- validación/saneamiento de entrada; no exponer detalles internos en los errores.       OK
+Requisitos técnicos 
+- Backend (.NET 8)          OK
+- FastEndpoints para los endpoints (REPR pattern).   OK
+- Separación de capas clara.                         OK
+- EF Core con SQL Server o PostgreSQL + migraciones. OK
+- Validadores separados de la lógica de endpoint.    OK, Pero no hay un validador como FluentValidation, solo en el dominio
+- Middlewares: al menos manejo global de errores (respuestas de error consistentes).    OK
+- Seguridad: autenticación (JWT o API Key) y autorización en los endpoints;             OK, Se hizo un usuario generico, prueba
 
-
-## Stack tecnológico
+## Stack
 
 | Componente | Tecnología |
 |---|---|
-| Framework | .NET 8 (ASP.NET Core Web API) |
+| Framework | .NET 8 (ASP.NET Core Web API) Asi se solicitó |
 | Estilo de API | **FastEndpoints 8.2** (patrón REPR: Request → Endpoint → Response) |
 | ORM | Entity Framework Core 8 |
 | Base de datos | PostgreSQL (proveedor `Npgsql.EntityFrameworkCore.PostgreSQL` 8.0.11) |
@@ -46,7 +45,7 @@ PostgreSQL Modalidad: Take-home + entrevista de defensa técnica Tiempo sugerido
 | Autorización | Políticas dinámicas por permiso (`Policies(...)` + `IAuthorizationPolicyProvider`) |
 | Documentación | Swagger vía `FastEndpoints.Swagger`  |
 | Errores | `IExceptionHandler` + `ProblemDetails`  |
-| Contenedores | Dockerfile incluido (Linux) |
+| Contenedores | Dockerfile incluido (en Visual) Lo use para solo para la base |
 
 ## Estructura del proyecto
 
@@ -83,26 +82,34 @@ El flujo de dependencias es: `Api → Core ← Infrastructure`.
 
 ## Cómo ejecutar
 
+
+### Base de Datos
+
 ```bash
 # Requiere PostgreSQL local (puerto 5432) — cadena en appsettings.json ("BASE")
+dotnet ef migrations add InitialCreate
+Update-Database
+```
+
+### API
+```bash
 dotnet run
 ```
 
-Al arrancar aplica las migraciones automáticamente (`Database.Migrate()`). Swagger disponible en `/swagger` en Development. Para probar los endpoints protegidos: `POST /api/auth/login` → usar el token como `Authorization: Bearer <token>`.
+## Front
+```bash
+npm run dev  
+```
 
+Para probar los endpoints protegidos: `POST /api/auth/login` → usar el token como `Authorization: Bearer <token>`.
 ---
 
 ### Detalle
-
 - LoginEndpoint -> falta integrar Identity/`SignInManager`.
 - Program ->  clave JWT con fallback hardcodeado;
 
-
-
-
-
 ## Frontend (React) 
-• Pantalla de listado con búsqueda y paginación. 
-• Formulario de alta/edición con manejo de estado (hooks) y validación en cliente. 
+• Pantalla de listado con búsqueda y paginación.  OK
+• Formulario de alta/edición con manejo de estado (hooks) y validación en cliente. OK
 • Consumo del API con manejo de estados de carga, éxito y error
 • Acción de cambio de estado.
