@@ -1,0 +1,190 @@
+/* ============ CONTENEDOR PRINCIPAL ============ */
+.unauthorized-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+/* ============ ERROR BOX ============ */
+.error-box {
+  background: white;
+  padding: 50px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ ICONO ============ */
+.error-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* ============ TÍTULOS Y TEXTO ============ */
+.error-box h1 {
+  color: #e74c3c;
+  font-size: 32px;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+}
+
+.error-message {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* ============ USER INFO ============ */
+.user-info {
+  background-color: #f8f9fa;
+  border-left: 4px solid #667eea;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.user-info p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.user-info p strong {
+  color: #333;
+  display: inline-block;
+  min-width: 80px;
+}
+
+/* ============ BOTONES ============ */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  flex: 1;
+  min-width: 160px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.btn-secondary:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* ============ HELP TEXT ============ */
+.help-text {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.help-text p {
+  color: #999;
+  font-size: 13px;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .error-box {
+    padding: 40px 25px;
+  }
+
+  .error-box h1 {
+    font-size: 26px;
+  }
+
+  .error-message {
+    font-size: 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    min-width: auto;
+  }
+
+  .error-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .error-box {
+    padding: 30px 20px;
+  }
+
+  .error-box h1 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .error-message {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
